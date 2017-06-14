@@ -9,19 +9,55 @@
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <style>
         header{ background-color: #f2f2f2; }
-        header ul li { height: 28px; line-height: 28px; text-align: center; display: none; color: #323237; position: relative;font-size: 18px;  }
+        header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #323237; position: relative;font-size: 18px;  }
         header ul li.active{ display: block; }
+        header {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            background-color: #e1017e;
+        }
+
+        header .left {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100px;
+            height: 50px;
+        }
+
+        header .center {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            background: url(../image/home_title.png);
+            background-size: 74px 19px;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
+
+        header .right {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 50px;
+            background: url(../image/home_membercenter.png);
+            background-size: 30px 30px;
+            background-position: center center;
+            background-repeat: no-repeat;
+        }
         #footer{  background-color: #f2f2f2; }
         #footer ul li{  padding-top: 36px; padding-bottom: 4px; background: url() no-repeat center 2px; background-size: auto 30px; text-align: center; }
         #footer ul li.active{ color: #6ab494; }
-        #footer ul li:nth-child(1){ background-image: url(./image/bottombtn0101.png); }
-        #footer ul li:nth-child(2){ background-image: url(./image/bottombtn0201.png); }
-        #footer ul li:nth-child(3){ background-image: url(./image/bottombtn0301.png); }
-        #footer ul li:nth-child(4){ background-image: url(./image/bottombtn0401.png); }
-        #footer ul li:nth-child(1).active{ background-image: url(./image/bottombtn0102.png); }
-        #footer ul li:nth-child(2).active{ background-image: url(./image/bottombtn0202.png); }
-        #footer ul li:nth-child(3).active{ background-image: url(./image/bottombtn0302.png); }
-        #footer ul li:nth-child(4).active{ background-image: url(./image/bottombtn0402.png); }
+        #footer ul li:nth-child(1){ background-image: url(./image/btmimg/10.png); }
+        #footer ul li:nth-child(2){ background-image: url(./image/btmimg/20.png); }
+        #footer ul li:nth-child(3){ background-image: url(./image/btmimg/30.png); }
+        #footer ul li:nth-child(4){ background-image: url(./image/btmimg/40.png); }
+        #footer ul li:nth-child(1).active{ background-image: url(./image/btmimg/11.png); }
+        #footer ul li:nth-child(2).active{ background-image: url(./image/btmimg/21.png); }
+        #footer ul li:nth-child(3).active{ background-image: url(./image/btmimg/31.png); }
+        #footer ul li:nth-child(4).active{ background-image: url(./image/btmimg/41.png); }
     </style>
 </head>
 <body>
@@ -39,9 +75,9 @@
     </div>
     <div id="footer" class="border-t">
         <ul class="flex-wrap" >
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con active" >首页</li>
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >植保</li>
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >管理</li>
+            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con active">新闻</li>
+            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >工作</li>
+            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >论坛</li>
             <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >我的</li>
         </ul>
     </div>
@@ -52,6 +88,7 @@
 <script type="text/javascript">
     apiready = function () {
 //      APICloud前端框架
+//     根据config.xml的statusBarAppearance属性，设置沉浸式标题栏
         $api.fixStatusBar( $api.dom('header') );
         api.setStatusBarStyle({
             style: 'light',
@@ -64,9 +101,9 @@
         var eHeaderList = $api.domAll('header li'),
             frames = [];
         for (var i = 0,len = eHeaderList.length; i < len; i++) {
-                frames.push( { 
-                    name: 'frame'+i, 
-                    url: './html/frame'+i+'.html', 
+                frames.push( {
+                    name: 'frame'+i,
+                    url: './html/frame'+i+'.html',
                     bgColor : 'rgba(0,0,0,.2)',
                     bounces:true
                 } )
@@ -75,15 +112,15 @@
             name: 'group',
             scrollEnabled: false,
             rect: {
-                x: 0, 
-                y: $api.dom('header').offsetHeight, 
-                w: api.winWidth, 
+                x: 0,
+                y: $api.dom('header').offsetHeight,
+                w: api.winWidth,
                 h: $api.dom('#main').offsetHeight
             },
             index: 0,
             frames: frames
         }, function (ret, err) {
-
+            alert(JSON.stringify(err));
         });
     }
 

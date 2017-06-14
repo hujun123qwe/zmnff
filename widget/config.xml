@@ -1,19 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<widget id="A6940390958009" version="0.0.1"> 
-  <name>啄木鸟飞防</name>  
-  <description/>  
-  <author email="hujun123qwe@163.com" href="http://www.apicloud.com">hujun123qwe</author>  
-  <content src="index.html"/>  
-  <preference name="appBackground" value="rgba(0,0,0,0)"/>  
-  <preference name="windowBackground" value="rgba(0,0,0,0)"/>  
-  <preference name="frameBackgroundColor" value="rgba(0,0,0,0)"/>  
-  <preference name="autoLaunch" value="true"/>  
-  <preference name="autoUpdate" value="true"/>  
-  <preference name="smartUpdate" value="false"/>  
-  <preference name="debug" value="true"/>  
-  <preference name="statusBarAppearance" value="true"/>  
-  <permission name="location"/>  
-  <permission name="internet"/>  
-  <access origin="*"/> 
+<widget id="A6940390958009" version="0.0.1">
+  <name>啄木鸟飞防</name>
+  <description>测试</description>
+  <author email="hujun123qwe@163.com" href="http://www.ploveruav.com">hujun123qwe</author>
+  <content src="index.html"/>
+  <preference name="appBackground" value="rgba(0,0,0,0)"/>
+  <preference name="windowBackground" value="rgba(0,0,0,0)"/>
+  <preference name="frameBackgroundColor" value="rgba(0,0,0,0)"/>
+  <preference name="autoLaunch" value="true"/>
+  <preference name="autoUpdate" value="true"/>
+  <preference name="smartUpdate" value="false"/>
+  <preference name="debug" value="true"/>
+  <preference name="statusBarAppearance" value="true"/>
+  <!-- 页面是否可以弹动 -->
+  <preference name="pageBounce" value="false"/>
+  <!-- 页面高度超出视图高度是否滚动 -->
+  <preference name="hScrollBarEnabled" value="true"/>
+  <preference name="vScrollBarEnabled" value="true"/>
+
+  <!-- 权限 -->
+  <permission name="location"/>
+  <permission name="internet"/>
+  <permission name="readPhoneState"/>
+  <access origin="*"/>
 </widget>
