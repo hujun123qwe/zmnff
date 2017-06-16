@@ -17,11 +17,85 @@
     </style>
 </head>
 <body>
-	<a>这里放frame</a>
+	<header id="header"></header>
+  <section id="list"></section>
 </body>
 
-<script>
+<script type="text/template" id="template">
+    <div>
+      {{?id.some}}
+        <a>get it!</a>
+      {{??}}
+        <a>not get it!</a>
+      {{?}}
+    </div>
+</script>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/db.js"></script>
 
+<script type="text/javascript">
+  apiready = function() {
+    init();
+    getWareList();
+  }
+  var loadMore_ = 1;
+  function init() {
+    alert("ready");
+  }
+
+  function getWareList(loadMore_){
+    if(loadMore_){
+
+    }
+    api.ajax({
+        url: 'http://192.168.1.101:3101/upLoad',
+        method: 'post',
+        data: {
+            values: {
+                name: 'haha'
+            },
+            files: {
+                file: 'fs://a.gif'
+            }
+        }
+    },function(ret, err){
+        if (ret) {
+            alert( JSON.stringify( ret ) );
+            loadWareList(ret, loadMore_);
+        } else {
+            alert( JSON.stringify( err ) );
+        }
+    });
+
+  }
+  function loadWareList(data_, loadMore_) {
+    var list = $api.byId('list');
+    var tempFn = doT.template($api.byId('template').innerHTML);
+    var resultText = tempFn(data_);
+    if(loadMore_){
+      $api.append(list, resultText);
+    }else{
+      $api.html(list, resultText);
+    }
+    api.parseTapmode();
+    if(loadMore_){
+      if(data_.length < LIMIT) {
+        var pushStatus = $api.byId('pushStatus');
+        pushStatus.innerHTML = "end!";
+      }
+    }
+    showWareList(data_);
+  }
+
+  function showWareList() {
+    for (var i=0; i<data_.length; i++){
+      var result = $db.select(data_[i].id);
+      if(result && result.data.length > 0){
+        alert("showWareList");
+      }
+    }
+  }
 </script>
 
 </html>
