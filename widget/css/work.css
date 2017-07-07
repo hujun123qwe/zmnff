@@ -1,0 +1,33 @@
+.tabBer{
+  height: 48px;
+  background-color: #FFFFFF;
+  position: relative;
+}
+
+.tabBar-btn{
+  width: 20%;
+  height: 47px;
+  border-bottom: 1px solid #CDCDCD;
+  font-size: 0.8em;
+  line-height: 48px;
+  color: #63625E;
+}
+
+.tabBar .tabBar-btn:active,.tabBar .tabBar-btn.tap-active{
+    background-color: #E5E5E5;
+    color: #72716E;
+}
+.tabBar .tabBar-btn.active{
+    color: #FFBA15;
+}
+
+.tabBar .tabBar-bar{
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 20%;
+    height: 4px;
+    background-color: rgba(255,186,31,0.8);
+    -webkit-transition: all .25s ease;
+            transition: all .25s ease;
+}

@@ -8,25 +8,31 @@
     <link rel="stylesheet" type="text/css" href="./css/api.css"/>
     <link rel="stylesheet" type="text/css" href="./css/style.css"/>
     <style>
-        header{ background-color: #f2f2f2; }
-        header ul li { height: 50px; line-height: 50px; text-align: center; display: none; color: #323237; position: relative;font-size: 18px;  }
-        header ul li.active{ display: block; }
-        header {
+        #header ul li {
+          line-height: 26px;
+          text-align: center;
+          display: none;
+          color: #323237;
+          position: relative;
+          font-size: 16px;
+        }
+        #header ul li.active{
+          display: block;
+        }
+        #header {
             position: relative;
             width: 100%;
-            height: 50px;
-            background-color: #e1017e;
+            height: 26px;
+            background-color: #eeeeee;
         }
-
-        header .left {
+        #header .left {
             position: absolute;
             bottom: 0;
             left: 0;
             width: 100px;
             height: 50px;
         }
-
-        header .center {
+        #header .center {
             position: relative;
             width: 100%;
             height: 50px;
@@ -36,40 +42,47 @@
             background-repeat: no-repeat;
         }
 
-        header .right {
+        #header .right {
             position: absolute;
             bottom: 0;
             right: 0;
             width: 40px;
             height: 50px;
-            background: url(../image/home_membercenter.png);
             background-size: 30px 30px;
             background-position: center center;
             background-repeat: no-repeat;
         }
-        #footer{  background-color: #f2f2f2; }
-        #footer ul li{  padding-top: 36px; padding-bottom: 4px; background: url() no-repeat center 2px; background-size: auto 30px; text-align: center; }
+        #footer{
+          background-color: #f2f2f2;
+        }
+        #footer ul li{
+          padding-top: 28px;
+          padding-bottom: 4px;
+          background: url() no-repeat center 2px;
+          text-align: center;
+          font-size: 10px;
+        }
         #footer ul li.active{ color: #6ab494; }
-        #footer ul li:nth-child(1){ background-image: url(./image/btmimg/10.png); }
-        #footer ul li:nth-child(2){ background-image: url(./image/btmimg/20.png); }
-        #footer ul li:nth-child(3){ background-image: url(./image/btmimg/30.png); }
-        #footer ul li:nth-child(4){ background-image: url(./image/btmimg/40.png); }
-        #footer ul li:nth-child(1).active{ background-image: url(./image/btmimg/11.png); }
-        #footer ul li:nth-child(2).active{ background-image: url(./image/btmimg/21.png); }
-        #footer ul li:nth-child(3).active{ background-image: url(./image/btmimg/31.png); }
-        #footer ul li:nth-child(4).active{ background-image: url(./image/btmimg/41.png); }
+        #footer ul li:nth-child(1){ background-image: url(./image/btmimg/10.png); background-size:24px 24px}
+        #footer ul li:nth-child(2){ background-image: url(./image/btmimg/20.png); background-size:24px 24px}
+        #footer ul li:nth-child(3){ background-image: url(./image/btmimg/30.png); background-size:24px 24px}
+        #footer ul li:nth-child(4){ background-image: url(./image/btmimg/40.png); background-size:24px 24px}
+        #footer ul li:nth-child(1).active{ background-image: url(./image/btmimg/11.png); background-size:24px 24px}
+        #footer ul li:nth-child(2).active{ background-image: url(./image/btmimg/21.png); background-size:24px 24px}
+        #footer ul li:nth-child(3).active{ background-image: url(./image/btmimg/31.png); background-size:24px 24px}
+        #footer ul li:nth-child(4).active{ background-image: url(./image/btmimg/41.png); background-size:24px 24px}
     </style>
 </head>
 <body>
 <div id="wrap" class="flex-wrap flex-vertical">
-    <header>
+    <div id="header">
         <ul>
-            <li class="border-b active">首页-这里放置LOGO图片</li>
-            <li class="border-b">植保1</li>
-            <li class="border-b">管理1</li>
-            <li class="border-b">我的1</li>
+            <li class="border-b active">啄木鸟飞防信息</li>
+            <li class="border-b">任务与工作</li>
+            <li class="border-b">无人机飞防论坛</li>
+            <li class="border-b">个人主页</li>
         </ul>
-    </header>
+    </div>
     <div id="main" class="flex-con middle">
 		<span style="text-align:cneter;font-size:32px;">啄木鸟飞防</span>
     </div>
@@ -89,7 +102,7 @@
     apiready = function () {
 //      APICloud前端框架
 //     根据config.xml的statusBarAppearance属性，设置沉浸式标题栏
-        $api.fixStatusBar( $api.dom('header') );
+        $api.fixStatusBar( $api.dom('#header') );
         api.setStatusBarStyle({
             style: 'light',
             color: '#0039cb'
@@ -98,7 +111,7 @@
     }
 
     function funIniGroup(){
-        var eHeaderList = $api.domAll('header li'),
+        var eHeaderList = $api.domAll('#header li'),
             frames = [];
         for (var i = 0,len = eHeaderList.length; i < len; i++) {
                 frames.push( {
@@ -113,7 +126,7 @@
             scrollEnabled: false,
             rect: {
                 x: 0,
-                y: $api.dom('header').offsetHeight,
+                y: $api.dom('#header').offsetHeight,
                 w: api.winWidth,
                 h: $api.dom('#main').offsetHeight
             },
@@ -127,7 +140,7 @@
     function randomSwitchBtn( tag ) {
         if( tag == $api.dom('#footer li.active') )return;
         var eFootLis = $api.domAll('#footer li'),
-            eHeaderList = $api.domAll('header li'),
+            eHeaderList = $api.domAll('#header li'),
             index = 0;
         for (var i = 0,len = eFootLis.length; i < len; i++) {
             if( tag == eFootLis[i] ){

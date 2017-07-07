@@ -5,34 +5,44 @@
     <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>消息</title>
+    <meta id="A6940390958009"/>
     <link rel="stylesheet" type="text/css" href="../css/api.css"/>
     <link rel="stylesheet" type="text/css" href="../css/style.css"/>
-    <style>
-        .empty{ text-align: center; padding: 120px 0; }
-        .news1{
-      		height:18px;
-      		position: absolute;
-      		size: 20px;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" href="../css/news.css"/>
 </head>
 <body>
 	<header id="header"></header>
-  <section id="list"></section>
-</body>
-
-<script type="text/template" id="template">
-    <div>
-      {{?id.some}}
-        <a>get it!</a>
-      {{??}}
-        <a>not get it!</a>
-      {{?}}
+  <section>
+    <div class="newsbox" id="newslist">
     </div>
+  </section>
+  <footer id="pushStatus" class="fonter"></footer>
+</body>
+<!-- 在使用doT时，命名默认是it，但要先填充，已是二维数组 -->
+<!-- 调用要使用[i].x -->
+<script type="text/template" id="template">
+    {{~it:news:index}}
+    <div class="news_li">
+      <div class="news_tu">
+        <a href="{{=news.url}}" target="_self">
+          <img src="{{=news.img.url}}" alt="{{=news.title}}"/>
+        </a>
+      </div>
+        <h2><a href="{{=news.url}}" target="_self">{{=news.title}}</a></h2>
+        <div class="news_ti">
+          <span class="type-round">{{=news.type}}</span>
+          <span class="trbstxt">{{=news.updatedAt}}</span>
+          <span class="trbszan">{{=news.read}}</span>
+        </div>
+      </div>
+    </div>
+    {{~}}
 </script>
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/doT.min.js"></script>
 <script type="text/javascript" src="../script/db.js"></script>
+<script type="text/javascript" src="../script/APICloud-rest-SHA1.js"></script>
+<script type="text/javascript" src=""></script>
 
 <script type="text/javascript">
   apiready = function() {
@@ -40,62 +50,103 @@
     getWareList();
   }
   var loadMore_ = 1;
+  var skip = 0;
+  var LIMIT = 10;
   function init() {
-    alert("ready");
+    // alert("ready");
   }
-
-  function getWareList(loadMore_){
-    if(loadMore_){
-
+  // 先加载10条新闻
+  function getWareList(){
+    var client = new Resource("A6940390958009", "49A63C55-9F0D-9EB2-C015-B94CBD73D6DC");
+    var News= client.Factory("news");
+    News.query({
+      "filter": {
+        "where": {},
+        "skip": 0,
+        "limit": 10,
+        "order": "updatedAt DESC"
+      }
+    },function(ret,err){
+      if (ret) {
+          // alert( JSON.stringify( ret ) );
+          findDate(ret);
+      } else {
+          alert( JSON.stringify( err ) );
+      }
+    })
+  }
+  function findDate(data) {
+    for(item in data){
+      for(i in data[item]){
+        if(i==="updatedAt"){
+          // alert(new Date(data[item][i]).getTime());
+          data[item][i] = getDateDiff(new Date(data[item][i]).getTime());
+        }
+      }
     }
-    api.ajax({
-        url: 'http://192.168.1.101:3101/upLoad',
-        method: 'post',
-        data: {
-            values: {
-                name: 'haha'
-            },
-            files: {
-                file: 'fs://a.gif'
-            }
-        }
-    },function(ret, err){
-        if (ret) {
-            alert( JSON.stringify( ret ) );
-            loadWareList(ret, loadMore_);
-        } else {
-            alert( JSON.stringify( err ) );
-        }
-    });
-
+    loadWareList(data);
   }
-  function loadWareList(data_, loadMore_) {
-    var list = $api.byId('list');
+  //对叠加对象如何循环
+  function getDateDiff(dateTimeStamp){
+          var minute = 1000 * 60;
+          var hour = minute * 60;
+          var day = hour * 24;
+          var halfamonth = day * 15;
+          var month = day * 30;
+          var now = new Date().getTime();
+          var diffValue = now - dateTimeStamp;
+          if(diffValue < 0){
+                  //若日期不符则弹出窗口告之
+                  //alert("结束日期不能小于开始日期！");
+          }
+          var monthC =diffValue/month;
+          var weekC =diffValue/(7*day);
+          var dayC =diffValue/day;
+          var hourC =diffValue/hour;
+          var minC =diffValue/minute;
+          if(monthC>=1){
+                  result= parseInt(monthC) + "个月前";
+          }else if(weekC>=1){
+                  result=parseInt(weekC) + "周前";
+          }else if(dayC>=1){
+                  result=parseInt(dayC) +"天前";
+          }else if(hourC>=1){
+                  result= parseInt(hourC) +"个小时前";
+          }else if(minC>=1){
+                  result=parseInt(minC) +"分钟前";
+          }else{
+                  result="刚刚";
+          }
+          return result;
+  }
+
+  function loadWareList(data_) {
+    var list = $api.byId('newslist');
     var tempFn = doT.template($api.byId('template').innerHTML);
     var resultText = tempFn(data_);
-    if(loadMore_){
-      $api.append(list, resultText);
-    }else{
-      $api.html(list, resultText);
-    }
-    api.parseTapmode();
+    // if(loadMore_){
+    //   $api.append(list, resultText);
+    // }else{
+    //
+    // }
+    $api.html(list, resultText);
+    // api.parseTapmode();
     if(loadMore_){
       if(data_.length < LIMIT) {
         var pushStatus = $api.byId('pushStatus');
-        pushStatus.innerHTML = "end!";
+        pushStatus.innerHTML = "我们是有底线的";
       }
     }
-    showWareList(data_);
+    //showWareList(data_);
   }
 
-  function showWareList() {
-    for (var i=0; i<data_.length; i++){
+  function showWareList(data_) {
+    for(var i=0; i<data_.length; i++){
       var result = $db.select(data_[i].id);
       if(result && result.data.length > 0){
-        alert("showWareList");
+
       }
     }
   }
 </script>
-
 </html>
