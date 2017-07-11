@@ -1,96 +1,88 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
-    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
-    <title>植保作业情况</title>
-    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/work.css"/>
-    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+  <meta charset="utf-8">
+  <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+  <title>植保任务</title>
+  <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/work.css"/>
+  <link rel="stylesheet" type="text/css" href="../css/common.css"/>
 </head>
 <body>
-    <header>
-      <div class="tabBar clearfix">
-          <div class="tabBar-btn pull-left all-type" tapmode="tap-active" onclick="changeGroupIndex(0);">图文</div>
-          <div class="tabBar-btn pull-left text-type" tapmode="tap-active" onclick="changeGroupIndex(1);">纯文</div>
-          <div class="tabBar-btn pull-left pic-type" tapmode="tap-active" onclick="changeGroupIndex(2);">纯图</div>
-          <div class="tabBar-btn pull-left latest-type" tapmode="tap-active" onclick="changeGroupIndex(3);">最新</div>
-          <div class="tabBar-btn pull-left essence-type" tapmode="tap-active" onclick="changeGroupIndex(4);">精华</div>
-          <div class="tabBar-bar"></div>
-      </div>
-    </header>
+  <div id="wrap">
+    <div id="header">
+    </div>
+    <div id="container">
+    </div>
+  </div>
 </body>
+<!-- 调用js文件 -->
 <script type="text/javascript" src="../script/api.js"></script>
 <script type="text/javascript" src="../script/doT.min.js"></script>
 <script type="text/javascript" src="../script/db.js"></script>
 <script type="text/javascript" src="../script/APICloud-rest-SHA1.js"></script>
 <script type="text/javascript">
-  apiready = function(){
-    $api.fixStatusBar($api.dom('header'));
-    api.setStatusBarStyle({
-      style: 'light',
-      color: '#0039cb'
+function frame1hidden(){
+  api.closeFrameGroup({
+      name: 'workGroup'
+  });
+}
+function frame1go(){
+    var NVNavigationBar = api.require("NVNavigationBar");
+    var headerH = $api.dom('#header');
+    NVNavigationBar.open({
+      rect:{x:0, y:headerH.offsetHeight, w:api.frameWidth, h:42},
+      styles:{
+        orientation:'horizontal',
+        bg: '#ffffff',
+        bgAlpha: 1,
+        font:{
+          size: 14,
+          sizeSelected: 18,
+          color: '#000000',
+          colorSelected: '#fefefe',
+          alpha: 1
+        },
+        itemSize:{w:api.frameWidth/2,h:44}
+      },
+      items:[{title:'任务发布',bg:'#ffffff',bgSelected:'#4285F4'},{title:'我的任务',bg:'#ffffff',bgSelected:'#4285F4'}],
+      selectedIndex: 1,
+      fixedOn: api.frameName,
+      id: 'first'
+    },function(ret, err){
+      // api.alert({msg:JSON.stringify(ret)});
+      api.setFrameGroupIndex({
+          name: 'workGroup',
+          index: ret.index,
+          scroll: true
+      });
     });
-  }
-
-  function funIniGroup(){
-    var groupColor = '#FFFFFF';
-
     api.openFrameGroup ({
-        name: 'work-group',
-        background: '#fff',
+        name: 'workGroup',
+        background: '#eeeeee',
         scrollEnabled: true,
         rect: {
              x: 0,
-             y: 74,
+             y: 100,
              w: 'auto',
-             h: api.winHeight-118
+             h: 100
         },
-        index: 1,
         frames: [{
-            name: 'all-type',
-            url: 'frame0.html',
-            bgColor: '#fff'
+            name: 'workPublish',
+            url: 'work/work_publish.html',
+            bgColor: '#fff',
+            preload: 0
         },{
-            name: 'text-type',
-            url: 'frame2.html',
-            bgColor: '#fff'
+            name: 'myWork',
+            url: 'work/my_work.html',
+            bgColor: '#fff',
+            preload: 0
         }]
     }, function(ret, err){
-        if( ret ){
-             alert( JSON.stringify( ret ) );
-             var name = ret.name;
-             var index = ret.index;
-             changeBar(index);
-        }else{
-             alert( JSON.stringify( err ) );
-        }
     });
-  }
 
-function changeBar(index) {
-  var tabBar = $api.dom('.tabBar .tabBar-bar');
-  var tabBatBtn = $api.domAll('.tabBar .tabBar-btn');
-  tabBar.style.webkitTransform = 'translateX('+(100*index)+'%)';
-  tabBar.style.transform = 'translateX('+100*index+'%)';
-  for(var i=0, len=tabBatBtn.length; i<len; i++){
-    if(index == i){
-      $api.addCls(tabBatBtn[i], 'active');
-    }else{
-      $api.removeCls(tabBatBtn[i], 'active');
-    }
-  }
-}
-
-function changeGroupIndex(index){
-  api.setFrameGroupIndex({
-    name: 'work-group',
-    index: index,
-    scroll: true
-  });
-  funIniGroup();
 }
 </script>
+
 </html>

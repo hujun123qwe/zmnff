@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
+    <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
+    <title>植保作业情况</title>
+    <link rel="stylesheet" type="text/css" href="../css/api.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/work.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/common.css"/>
+</head>
+<body>
+    <header>
+      <div class="tabBar clearfix">
+          <div class="tabBar-btn pull-left all-type" tapmode="tap-active" onclick="changeGroupIndex(0);">图文</div>
+          <div class="tabBar-btn pull-left text-type" tapmode="tap-active" onclick="changeGroupIndex(1);">纯文</div>
+          <div class="tabBar-btn pull-left pic-type" tapmode="tap-active" onclick="changeGroupIndex(2);">纯图</div>
+          <div class="tabBar-btn pull-left latest-type" tapmode="tap-active" onclick="changeGroupIndex(3);">最新</div>
+          <div class="tabBar-btn pull-left essence-type" tapmode="tap-active" onclick="changeGroupIndex(4);">精华</div>
+          <div class="tabBar-bar"></div>
+      </div>
+    </header>
+</body>
+<script type="text/javascript" src="../script/api.js"></script>
+<script type="text/javascript" src="../script/doT.min.js"></script>
+<script type="text/javascript" src="../script/db.js"></script>
+<script type="text/javascript" src="../script/APICloud-rest-SHA1.js"></script>
+<script type="text/javascript">
+  apiready = function(){
+    $api.fixStatusBar($api.dom('header'));
+    api.setStatusBarStyle({
+      style: 'light',
+      color: '#0039cb'
+    });
+  }
+
+  function funIniGroup(){
+    var groupColor = '#FFFFFF';
+
+    api.openFrameGroup ({
+        name: 'work-group',
+        background: '#fff',
+        scrollEnabled: true,
+        rect: {
+             x: 0,
+             y: 74,
+             w: 'auto',
+             h: api.winHeight-118
+        },
+        index: 1,
+        frames: [{
+            name: 'all-type',
+            url: 'frame0.html',
+            bgColor: '#fff'
+        },{
+            name: 'text-type',
+            url: 'frame2.html',
+            bgColor: '#fff'
+        }]
+    }, function(ret, err){
+        if( ret ){
+             alert( JSON.stringify( ret ) );
+             var name = ret.name;
+             var index = ret.index;
+             changeBar(index);
+        }else{
+             alert( JSON.stringify( err ) );
+        }
+    });
+  }
+
+function changeBar(index) {
+  var tabBar = $api.dom('.tabBar .tabBar-bar');
+  var tabBatBtn = $api.domAll('.tabBar .tabBar-btn');
+  tabBar.style.webkitTransform = 'translateX('+(100*index)+'%)';
+  tabBar.style.transform = 'translateX('+100*index+'%)';
+  for(var i=0, len=tabBatBtn.length; i<len; i++){
+    if(index == i){
+      $api.addCls(tabBatBtn[i], 'active');
+    }else{
+      $api.removeCls(tabBatBtn[i], 'active');
+    }
+  }
+}
+
+function changeGroupIndex(index){
+  api.setFrameGroupIndex({
+    name: 'work-group',
+    index: index,
+    scroll: true
+  });
+  funIniGroup();
+}
+</script>
+</html>
