@@ -1,0 +1,195 @@
+.work_item{
+  padding: 3px 3px;
+  width: 100%;
+  height: 160px;
+  border: 1px solid black;
+}
+.work_title{
+  padding-left: 100px;
+}
+.work_attr{
+  padding-top: 42px;
+  padding-bottom: 10px;
+}
+.work_img{
+  margin: 5px 5px;
+  position: relative;
+  height: 80px;
+  width: 80px;
+  overflow: hidden;
+  float: left;
+}
+.work_label{
+  padding-left: 10px;
+  padding-right: 10px;
+  color:#a0a0a0;
+  border: 1px solid;
+  border-radius: 10px;
+}
+.time_over{
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-right: 10px;
+  color:#a0a0a0;
+  border: 1px solid;
+  border-radius: 10px;
+  float: right;
+}
+.work_info{
+  margin: 0 auto;
+  text-align: left;
+  display: table;
+}
+.ulall{
+  float: left;
+  display: inline;
+  text-align: center;
+  margin: 0 auto;
+  margin-right: 50px;
+}
+.ulright{
+  float: left;
+  display: inline;
+  text-align: center;
+  margin: 0 auto;
+}
+.liup{
+  color:#a0a0a0;
+  font-size:12px;
+}
+.hr{
+  margin: 0 auto;
+  width: 80%;
+  border-top: 1px solid gray;
+}
+/*list列表*/
+.content li {
+    padding-bottom: 10px;
+    margin: 10px;
+    border-bottom: 1px solid #D8D8D8;
+}
+
+.tab-content li {
+    margin: 10px 5px;
+    padding: 10px;
+    font-size: 14px;
+    border-bottom: 1px solid #DBDBDB;
+}
+
+.item, .text {
+    display: -webkit-box;
+}
+
+.img {
+    width: 80px;
+    height: 80px;
+}
+
+img {
+    width: 100%;
+    display: block;
+}
+
+.text {
+    -webkit-box-flex: 1;
+    -webkit-box-orient: vertical;
+    margin: 0 5px;
+
+}
+
+.price span {
+    color: #FC6B32;
+    font-size: 25px;
+}
+
+.icon {
+    background-size: 12px;
+    background-position: center center;;
+    background-repeat: no-repeat no-repeat;
+    display: inline-block;
+    height: 12px;
+}
+
+.icon-people {
+
+}
+
+.icon-heart {
+
+}
+
+.text-title {
+    margin-left: 8px;
+    font-size: 14px;
+    line-height: 17px;
+}
+
+.text-price {
+    padding: 2px 0;
+    margin-bottom: 16px;
+    margin-left: 6px;
+}
+
+.new-price {
+    font-size: 20px;
+    color: #ff7c70;
+    font-family: Impact, Arail, sans-serif;
+    font-weight: bold;
+}
+
+.text-price del, .icon-people + span, .icon-heart + span {
+    color: #8c8c8c;
+    font-size: 10px;
+}
+
+.red-lable {
+    width: 70px;
+    background-color: #FD7D73;
+    position: absolute;
+    left: 5px;
+    height: 40px;
+    line-height: 40px;
+    color: #fff;
+    -webkit-box-sizing: border-box;
+    text-align: center;
+}
+
+.red-lable-top {
+    top: 0;
+}
+
+.red-lable-bottom {
+    bottom: 0;
+}
+
+.gray-lable {
+    background-image: -webkit-linear-gradient(top, rgba(59, 59, 59, .6), rgba(27, 27, 27, .6), rgba(50, 50, 50, .4), rgba(31, 31, 31, .4));
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 20px;
+    display: block;
+    color: #fff;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.right-lable {
+    text-align: end;
+    padding-left: 0;
+    padding-right: 5px;
+}
+
+.place-lable {
+    height: 25px;
+    line-height: 25px;
+    font-size: 14px;
+}
+.text-label{
+  -webkit-box-flex: 1;
+  -webkit-flex: 1;
+  flex: 1;
+}

@@ -1,9 +1,78 @@
 html,body{
 	height: 100%;
-	width:100%;}#header{    text-align: center;		background-color: #81a9c3;		color: #fff;    width: 100%;}#header h1{    font-size: 20px;		height: 44px;		line-height: 44px;		margin: 0em;		color: #fff;}#header .left {		position: absolute;		bottom: 0;		left: 0;		width: 100px;		height: 50px;}#header .center {		position: relative;		width: 100%;		height: 50px;		background: url(../image/home_title.png);		background-size: 74px 19px;		background-position: center center;		background-repeat: no-repeat;}#header .right {		position: absolute;		bottom: 0;		right: 0;		width: 40px;		height: 50px;		background-size: 30px 30px;		background-position: center center;		background-repeat: no-repeat;}#main{    -webkit-box-flex: 1;    -webkit-flex: 1;    flex: 1;    padding: 2em;}
-#footer{    height: 30px; line-height: 30px;    background-color: #81a9c3;    width: 100%;    text-align: center;}#footer h5{    color: white;}
+	width:100%;	font-size:14px;}#header{    text-align: center;		background-color: #81a9c3;		color: #fff;    width: 100%;}#header h1{    font-size: 20px;		height: 44px;		line-height: 44px;		margin: 0em;		color: #fff;}#header .left {		position: absolute;		bottom: 0;		left: 0;		width: 100px;		height: 50px;}#header .center {		position: relative;		width: 100%;		height: 50px;		background: url(../image/home_title.png);		background-size: 74px 19px;		background-position: center center;		background-repeat: no-repeat;}#header .right {		position: absolute;		bottom: 0;		right: 0;		width: 40px;		height: 50px;		background-size: 30px 30px;		background-position: center center;		background-repeat: no-repeat;}#main{    -webkit-box-flex: 1;    -webkit-flex: 1;    flex: 1;    padding: 2em;}
+#footer{    background-color: #81a9c3;    width: 100%;    text-align: center;}#footer h5{    color: white;}
 .con{font-size: 28px; text-align: center;}
 
 .pull-left{
 	float: left;
 }
+.center{
+	text-align: center;
+}
+
+.middle{
+	margin: 0 auto;
+}
+
+.hover{ opacity: .8; }
+
+.flex-wrap{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: flex;
+}
+
+.flexcon{
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	flex: 1;
+}
+
+.flex-vertical{
+	-webkit-box-orient: vertical;
+	-webkit-flex-flow: column;
+	flex-flow: column;
+}
+
+.border-t,
+.border-b{
+	position:relative;
+}
+
+.border-t:before,
+.border-b:after{
+	content: '';
+	position: absolute;
+	left: 0;
+	top:0;
+	background: #ddd;
+	right:0;
+	height: 1px;
+}
+.border-b:after{
+	top:auto; bottom:0;
+}
+
+#wrap{
+	height: 100%;
+}
+#work{
+	height: 50px;
+	text-align: center;
+}
+#zone{
+	text-align: center;
+	height: 50px;
+	font-size: 24px;
+}
+.titlebar{
+	display: none;
+}
+.activebar{display: block;}
+#news{
+	height:50px;
+	mrgin:0 auto;
+	text-align:center;
+}
+.flex1 {-webkit-box-flex:1;-webkit-flex: 1;flex:1;color: #909090;}

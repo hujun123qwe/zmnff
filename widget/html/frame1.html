@@ -23,64 +23,76 @@
 <script type="text/javascript" src="../script/db.js"></script>
 <script type="text/javascript" src="../script/APICloud-rest-SHA1.js"></script>
 <script type="text/javascript">
+apiready = function(){
+  var NVNavigationBar = api.require("NVNavigationBar");
+  var headerH = $api.dom('#header');
+  NVNavigationBar.open({
+    rect:{x:0, y:headerH.offsetHeight, w:api.frameWidth, h:42},
+    styles:{
+      orientation:'horizontal',
+      bg: '#ffffff',
+      bgAlpha: 1,
+      font:{
+        size: 14,
+        sizeSelected: 18,
+        color: '#000000',
+        colorSelected: '#fefefe',
+        alpha: 1
+      },
+      itemSize:{w:api.frameWidth/2,h:44}
+    },
+    items:[{title:'任务发布',bg:'#ffffff',bgSelected:'#4285F4'},{title:'我的任务',bg:'#ffffff',bgSelected:'#4285F4'}],
+    selectedIndex: 1,
+    fixedOn: api.frameName,
+    id: 'first'
+  },function(ret, err){
+    // api.alert({msg:JSON.stringify(ret)});
+    if(ret.index == 0){
+      api.openFrame({
+          name: 'work_publish',
+          url: './work/work_publish.html',
+          rect: {
+              x: 0,
+              y: 0,
+              w: 'auto',
+              h: 'auto'
+          },
+          pageParam: {
+              name: 'test'
+          },
+          bounces: true,
+          bgColor: 'rgba(0,0,0,0)',
+          vScrollBarEnabled: true,
+          hScrollBarEnabled: true
+      });
+    }else if(ret.index == 1){
+      api.openFrame({
+          name: 'my_work',
+          url: './my_work.html',
+          rect: {
+              x: 0,
+              y: 0,
+              w: 'auto',
+              h: 'auto'
+          },
+          pageParam: {
+              name: 'test'
+          },
+          bounces: true,
+          bgColor: 'rgba(0,0,0,0)',
+          vScrollBarEnabled: true,
+          hScrollBarEnabled: true
+      });
+
+    }
+  });
+}
 function frame1hidden(){
   api.closeFrameGroup({
       name: 'workGroup'
   });
 }
 function frame1go(){
-    var NVNavigationBar = api.require("NVNavigationBar");
-    var headerH = $api.dom('#header');
-    NVNavigationBar.open({
-      rect:{x:0, y:headerH.offsetHeight, w:api.frameWidth, h:42},
-      styles:{
-        orientation:'horizontal',
-        bg: '#ffffff',
-        bgAlpha: 1,
-        font:{
-          size: 14,
-          sizeSelected: 18,
-          color: '#000000',
-          colorSelected: '#fefefe',
-          alpha: 1
-        },
-        itemSize:{w:api.frameWidth/2,h:44}
-      },
-      items:[{title:'任务发布',bg:'#ffffff',bgSelected:'#4285F4'},{title:'我的任务',bg:'#ffffff',bgSelected:'#4285F4'}],
-      selectedIndex: 1,
-      fixedOn: api.frameName,
-      id: 'first'
-    },function(ret, err){
-      // api.alert({msg:JSON.stringify(ret)});
-      api.setFrameGroupIndex({
-          name: 'workGroup',
-          index: ret.index,
-          scroll: true
-      });
-    });
-    api.openFrameGroup ({
-        name: 'workGroup',
-        background: '#eeeeee',
-        scrollEnabled: true,
-        rect: {
-             x: 0,
-             y: 100,
-             w: 'auto',
-             h: 100
-        },
-        frames: [{
-            name: 'workPublish',
-            url: 'work/work_publish.html',
-            bgColor: '#fff',
-            preload: 0
-        },{
-            name: 'myWork',
-            url: 'work/my_work.html',
-            bgColor: '#fff',
-            preload: 0
-        }]
-    }, function(ret, err){
-    });
 
 }
 </script>

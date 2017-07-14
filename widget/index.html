@@ -6,7 +6,7 @@
     <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
     <title>啄木鸟飞防</title>
     <link rel="stylesheet" type="text/css" href="./css/api.css"/>
-    <link rel="stylesheet" type="text/css" href="./css/style.css"/>
+    <link rel="stylesheet" type="text/css" href="./css/common.css"/>
     <style>
         #header ul li {
           line-height: 26px;
@@ -38,43 +38,79 @@
         #footer ul li:nth-child(2).active{ background-image: url(./image/btmimg/21.png); background-size:24px 24px}
         #footer ul li:nth-child(3).active{ background-image: url(./image/btmimg/31.png); background-size:24px 24px}
         #footer ul li:nth-child(4).active{ background-image: url(./image/btmimg/41.png); background-size:24px 24px}
+        .scrollbar {display: -webkit-box;/*必不可少*/ display: -webkit-flex; text-align: center; height: 40px; line-height: 40px;background: #EBECF0;font-size: 16px;position: relative;}
+        .indexbar {position: absolute;/*background: #0fc;*/width: 50%;height: 5px;left: 0px;bottom: 0px;-webkit-transition: 300ms;}
+        .redbox {background: #DB4646;width: 60px;height: 5px;position: relative;left: auto;right: auto; margin-left: auto; margin-right: auto;}
+        .btn_click {background: #DADDE0;}
     </style>
 </head>
 <body>
 <div id="wrap" class="flex-wrap flex-vertical">
-    <div id="header">
-        <ul>
-            <li class="border-b active">啄木鸟飞防信息</li>
-            <li class="border-b">任务与工作</li>
-            <li class="border-b">无人机飞防论坛</li>
-            <li class="border-b">个人主页</li>
-        </ul>
-    </div>
-    <div id="main" class="flex-con middle">
-		<span style="text-align:cneter;font-size:32px;">啄木鸟飞防</span>
-    </div>
-    <div id="footer" class="border-t">
-        <ul class="flex-wrap" >
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con active">新闻</li>
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >工作</li>
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >论坛</li>
-            <li tapmode="hover" onclick="randomSwitchBtn( this );" class="flex-con" >我的</li>
-        </ul>
-    </div>
+      <div id="news" class="titlebar activebar">
+          <img src="image/btmimg/logo.png" style="height:40px;overflow:scroll;margin-top:8px;">
+      </div>
+
+      <div id="work" class="titlebar">
+        <div class="topbar">
+          <span style="font-size:24px;">植保任务</span>
+        </div>
+        <div id="scrollbar" class="scrollbar">
+          <div class="bar1 flex1" tapmode="btn_click" onclick="switchWork(0)">在线任务</div>
+          <div class="bar2 flex1" tapmode="btn_click" onclick="switchWork(1)" id="matchwidth">我的任务</div>
+          <div class="indexbar" id="indexbarHot"><div class="redbox"></div></div>
+        </div>
+      </div>
+
+      <div id="zone" class="titlebar">
+        <span style="padding-top:8px;padding-bottom:8px;">运营管理</span>
+      </div>
+      <!-- <div id="home" class="titlebar">个人主页</div> -->
+
+        <div id="main">
+        </div>
+
+        <div id="footer" class="border-t">
+            <ul class="flex-wrap">
+                <li tapmode="hover" onclick="switchframe('news')" class="flexcon active">新闻</li>
+                <li tapmode="hover" onclick="switchframe('work')" class="flexcon" >工作</li>
+                <li tapmode="hover" onclick="switchframe('zone')" class="flexcon" >管理</li>
+                <li tapmode="hover" onclick="switchframe('home')" class="flexcon" >我的</li>
+            </ul>
+        </div>
 </div>
+
 </body>
 </html>
 <script type="text/javascript" src="script/api.js"></script>
 <script type="text/javascript">
+  var news = $api.byId('news');
+  var newsHeader = $api.offset(news);
+  var footer = $api.byId('footer');
+  var footerPos = $api.offset(footer);
     apiready = function () {
 //      APICloud前端框架
 //     根据config.xml的statusBarAppearance属性，设置沉浸式标题栏
-        $api.fixStatusBar( $api.dom('#header') );
+        // $api.fixStatusBar( $api.dom('#header') );
         api.setStatusBarStyle({
             style: 'light',
             color: '#0039cb'
         });
-        funIniGroup();
+        // funIniGroup();
+        //第一次进入app显示的frame
+        api.openFrame({
+            name: 'news',
+            url: './html/news/news_body.html',
+            rect: {
+                x: 0,
+                y: newsHeader.h,
+                w: 'auto',
+                h: api.frameHeight-newsHeader.h-footerPos.h
+            },
+            pageParam: {name: 'test'},
+            bounces: false,      //页面是否弹动
+            opaque:false,
+            bgColor: 'rgba(0,0,0,0)',
+        });
     }
     function funIniGroup(){
         var eHeaderList = $api.domAll('#header li'),
@@ -114,7 +150,7 @@
     }
 
     // 随意切换按钮
-    function randomSwitchBtn( tag ) {
+    function randomSwitchBtn_old( tag ) {
         if( tag == $api.dom('#footer li.active') )return;
         var eFootLis = $api.domAll('#footer li'),
             eHeaderList = $api.domAll('#header li'),
@@ -135,5 +171,166 @@
         });
     }
 
+    // ===================================
+  	// 响应底部按钮的切换frame
+    // 打开frame或者framegroup
+  	// ===================================
+    function switchframe(type){
+      switch (type) {
+        case 'news':
+          randomSwitchBtn('news', 0);
+          hideAllFrame();
+          openframeinstance('news', newsHeader.h);
+          showFrame('news');
+          break;
+        case 'work':
+          randomSwitchBtn('work', 1);
+          hideAllFrame();
+          var frameWidth = $api.byId('work');
+          var frameWidthPos = $api.offset(frameWidth);
+          openframeinstance('work', frameWidthPos.h);
+          showFrame('work');
+          break;
+        case 'zone':
+          randomSwitchBtn('zone', 2);
+          hideAllFrame();
+          var zone = $api.byId('zone');
+          var zonePos = $api.offset(zone);
+          openframeinstance('zone', zonePos.h);
+          showFrame('zone');
+          break;
+        case 'home':
+          randomSwitchBtn('home', 3);
+          hideAllFrame();
+          openframeinstance('home', 0);
+          showFrame('home');
+          break;
+        default:
+          break;
+      }
+    }
+
+    function randomSwitchBtn(name, index){
+      var lis = $api.domAll('.flexcon');
+      for(var i=0; i<lis.length; i++){
+        if(index == i){
+          $api.addCls(lis[i], 'active');
+          continue;
+        }else{
+          if($api.hasCls(lis[i], 'active')){
+            $api.removeCls(lis[i], 'active');
+          }
+        }
+      }
+      var lies = $api.domAll('.titlebar');
+      for(var i=0; i<lies.length; i++){
+        if(index == i){
+          $api.addCls(lies[index], 'activebar');
+          continue;
+        }else{
+          if($api.hasCls(lies[i], 'activebar')){
+            $api.removeCls(lies[i], 'activebar');
+          }
+        }
+      }
+    }
+    function hideAllFrame() {
+      api.setFrameAttr({
+          name: 'news',
+          hidden:true
+      });
+      api.setFrameGroupAttr({
+          name: 'work',
+          hidden:true
+      });
+      api.setFrameAttr({
+          name: 'zone',
+          hidden:true
+      });
+      api.setFrameAttr({
+          name: 'home',
+          hidden:true
+      });
+    }
+    function openframeinstance(frame, marginTop){
+      if(frame === 'work'){
+        api.openFrameGroup ({
+            name: 'workGroup',
+            background: '#fff',
+            scrollEnabled: true,
+            rect: {
+                 x: 0,
+                 y: marginTop,
+                 w: 'auto',
+                 h: api.frameHeight-marginTop-footerPos.h
+            },
+            index: 0,
+            frames: [{
+                name: 'work_publish',
+                url: './html/work/work_publish.html',
+                bounces:false,
+                opaque:true,
+                bgColor: '#FFFFFF',
+            },{
+                name: 'my_work',
+                url: './html/work/my_work.html',
+                bounces:false,
+                opaque:true,
+                bgColor: '#FFFFFF',
+            }]
+        }, function(ret, err){
+            var name = ret.name;
+            var index = ret.index;
+            //有代码没写
+            switchWorkIndex(index);
+        });
+      }else{
+        api.openFrame({
+            name: frame,
+            url: './html/'+frame+'/'+frame+'_body.html',
+            rect: {
+                x: 0,
+                y: marginTop,
+                w: 'auto',
+                h: api.frameHeight-marginTop-footerPos.h
+            },
+            pageParam: { name: 'test' },
+            bounces: false,
+            opaque: false,
+            bgColor: 'rgba(70,70,70,0)',
+        });
+      }
+    }
+    function switchWorkIndex(index){
+      if(index==0){
+        var width = parseInt(api.frameWidth/2);
+        $api.css($api.byId('indexbarHot'), "-webkit-transform:translate(" + 0 + "px,0)");
+      }else{
+        var width = parseInt(api.frameWidth/2);
+        $api.css($api.byId('indexbarHot'), "-webkit-transform:translate(" + width + "px,0)");
+      }
+    }
+    function switchWork(index){
+      api.setFrameGroupIndex({
+          name: 'workGroup',
+          index: index,
+          scroll: true
+      });
+      switchWorkIndex(index);
+    }
+    function showFrame(type){
+      if(type === 'work'){
+        api.setFrameGroupAttr({
+            name: 'workGroup',
+            hidden: false
+        });
+
+      }else{
+        api.setFrameAttr({
+            name: type,
+            hidden: false
+        });
+      }
+    }
     // =====================================================================
 </script>

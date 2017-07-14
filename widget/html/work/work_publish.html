@@ -5,28 +5,103 @@
   <meta name="viewport" content="maximum-scale=1.0,minimum-scale=1.0,user-scalable=0,width=device-width,initial-scale=1.0"/>
   <meta name="format-detection" content="telephone=no,email=no,date=no,address=no">
   <title>任务发布</title>
-  <link rel="stylesheet" type="text/css" href="./css/api.css"/>
-  <link rel="stylesheet" type="text/css" href="./css/style.css"/>
-  <link rel="stylesheet" type="text/css" href="./css/work_publish.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/api.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+  <link rel="stylesheet" type="text/css" href="../../css/work_publish.css"/>
 </head>
 
 <body>
-  任务发布
   <!-- ====================================== -->
-  <div class="work_item">
+  <!-- <div class="work_item">
+    <div class="work_img">
+      <img style="border-radius:0.5rem;" src="../../image/test/1.jpg"/>
+    </div>
     <div class="work_title">
-      <img/>
-      <h2></h2>
-      <span class="work_label"></span>
-      <span class="time_over"></span>
+      <h2>中稻/400亩/当涂县护河镇</h2>
+      <div class="work_attr">
+        <span class="work_label">未领取</span>
+        <span class="time_over">5小时前</span>
+      </div>
     </div>
+    <div class="hr"></div>
     <div class="work_info">
-      <span class="work_info_cell">作物</span>
-      <span class="work_info_cell">单价</span>
-      <span class="work_info_cell">亩数</span>
-      <span class="work_info_cell">总价</span>
+      <ul class="ulall">
+        <li class="liup">作物</li>
+        <li class="lidown">水稻</li>
+      </ul>
+      <ul class="ulall">
+        <li class="liup">单价</li>
+        <li class="lidown">￥8元/亩</li>
+      </ul>
+      <ul class="ulall">
+        <li class="liup">亩数</li>
+        <li class="lidown">1420亩</li>
+      </ul>
+      <ul class="ulright">
+        <li class="liup">总价</li>
+        <li class="lidown">￥11360元</li>
+      </ul>
     </div>
-  </div>
+  </div> -->
+  <ul class="content">
+      <li onclick="toDetail()" tapmode="">
+          <div class="item">
+              <div class="img">
+                  <img src="../../image/work-publish/1.jpg">
+              </div>
+              <div class="text">
+                  <div class="text-title">中稻/400亩/当涂县护河镇</div>
+                  <div class="text-price">
+                      <span class="new-price">￥3179</span>
+                  </div>
+                  <div class="text-label">
+                      <i class="icon icon-people"></i>
+                      <span class="time_over">5小时前</span>
+                      <i class="icon icon-heart"></i>
+                      <span class="work_label">未领取</span>
+                  </div>
+              </div>
+          </div>
+      </li>
+      <li onclick="toDetail()" tapmode="">
+          <div class="item">
+              <div class="img">
+                  <img src="../../image/work-publish/1.jpg">
+              </div>
+              <div class="text">
+                  <div class="text-title">中稻/400亩/当涂县护河镇</div>
+                  <div class="text-price">
+                      <span class="new-price">￥3179</span>
+                  </div>
+                  <div class="text-label">
+                      <i class="icon icon-people"></i>
+                      <span class="time_over">5小时前</span>
+                      <i class="icon icon-heart"></i>
+                      <span class="work_label">未领取</span>
+                  </div>
+              </div>
+          </div>
+      </li>
+      <li onclick="toDetail()" tapmode="">
+          <div class="item">
+              <div class="img">
+                  <img src="../../image/work-publish/1.jpg">
+              </div>
+              <div class="text">
+                  <div class="text-title">中稻/400亩/当涂县护河镇</div>
+                  <div class="text-price">
+                      <span class="new-price">￥3179</span>
+                  </div>
+                  <div class="text-label">
+                      <i class="icon icon-people"></i>
+                      <span class="time_over">未领取</span>
+                      <i class="icon icon-heart"></i>
+                      <span class="work_label">5小时前</span>
+                  </div>
+              </div>
+          </div>
+      </li>
+  </ul>
   <!-- ====================================== -->
   <script type="text/template" id="template">
 
