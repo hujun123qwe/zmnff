@@ -24,10 +24,6 @@
     -webkit-transition-duration: 1.5s, 0.1s;
     -webkit-transition-delay: 0.1s;
 }
-.login-header {
-    height: 100%;
-    background-color: #1C1515;
-}
 .title {
     text-align: center;
     padding-top: 15px;
@@ -46,6 +42,10 @@
 .mine {
     background-color: #1C1515;
     padding-top: 5px;
+}
+.login-header {
+    height: 100%;
+    background-color: #1C1515;
 }
 .mine li, .bottom li {
     display: inline-block;

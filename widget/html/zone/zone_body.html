@@ -19,11 +19,17 @@
 		#topbar_search {height: 28px;}
 		.btn_click {background: #DADDE0;}
 		#topbar_title {display: inline-block;font-size: 24px; line-height: 50px;padding-left: 10px;}
-
 		ul {background: #0f0;}
 		table {width: 100%;}
-		td {text-align: center;padding-top: 5px;width: 25%;}
-		.itembtn {background: url(../../image/zone/1.png) no-repeat center;background-size: 150px 150px;height: 40px;padding-top: 65px;width: 100%;}
+		td {text-align: center;padding-top: 5px;width: 25%; background-color: #ffffff}
+		.itembtn1 {background: url(../../image/zone/1.png) no-repeat center;background-size: 50px 50px;height: 40px;padding-top: 95px;width: 100%; color: #000000;}
+    .itembtn3 {background: url(../../image/zone/2.png) no-repeat center;background-size: 50px 50px;height: 40px;padding-top: 95px;width: 100%; color: #000000;}
+    .itembtn2 {background: url(../../image/zone/3.png) no-repeat center;background-size: 50px 50px;height: 40px;padding-top: 95px;width: 100%; color: #000000;}
+    .itembtn4 {background: url(../../image/zone/4.png) no-repeat center;background-size: 50px 50px;height: 40px;padding-top: 95px;width: 100%; color: #000000;}
+    .itembtn5 {background: url(../../image/zone/5.png) no-repeat center;background-size: 50px 50px;height: 40px;padding-top: 95px;width: 100%; color: #000000;}
+    .itembtn6 {background: url(../../image/zone/6.png) no-repeat center;background-size: 50px 50px;height: 40px;padding-top: 95px;width: 100%; color: #000000;}
+    .itembtn7 {background: url(../../image/zone/7.png) no-repeat center;background-size: 50px 50px;height: 40px;padding-top: 95px;width: 100%; color: #000000;}
+    .itembtn8 {background: url(../../image/zone/8.png) no-repeat center;background-size: 50px 50px;height: 40px;padding-top: 95px;width: 100%; color: #000000;}
 		.griditem {display: inline-block;}
 		.brb {border-right: 1px solid #E1E4E9;border-bottom: 1px solid #E1E4E9;}  /*border right bottom*/
 		.bb {border-bottom: 1px solid #E1E4E9;}
@@ -34,24 +40,18 @@
 	<table>
 		<tbody>
 			<tr class="row1">
-				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn">电视剧</a></td>
-				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn">电影</a></td>
-				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn">动漫</a></td>
+				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn1">植保需求</a></td>
+				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn2">飞防团队管理</a></td>
+				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn3">客户管理</a></td>
 			</tr>
 			<tr class="row1">
-				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn">美剧</a></td>
-				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn">纪录片</a></td>
-				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn">搜狐影院</a></td>
+				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn4">无人机管理</a></td>
+				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn5">作业统计</a></td>
+				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn6">每日进度</a></td>
 			</tr>
 			<tr class="row1">
-				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn">新闻</a></td>
-				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn">音乐</a></td>
-				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn">娱乐</a></td>
-			</tr>
-			<tr class="row1">
-				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn">体育</a></td>
-				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn">搜狐出品</a></td>
-				<td></td>
+				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn7">联盟</a></td>
+				<td class="brb"  tapmode="ware_item_hover" onclick="openWareWindow()"><a href="" class="itembtn8">测亩工具</a></td>
 			</tr>
 		</tbody>
 	</table>
@@ -65,7 +65,7 @@
 	{
 		api.openWin({
 		    name: 'wareClass',
-		    url: './ware_class.html',
+		    url: '../404.html',
 		    pageParam: {},
 		    bounces: false,
 		    opaque: false,

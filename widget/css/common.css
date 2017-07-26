@@ -58,7 +58,7 @@ html,body{
 	height: 100%;
 }
 #work{
-	height: 50px;
+	height: 90px;
 	text-align: center;
 }
 #zone{
@@ -76,3 +76,53 @@ html,body{
 	text-align:center;
 }
 .flex1 {-webkit-box-flex:1;-webkit-flex: 1;flex:1;color: #909090;}
+#footer{
+	background-color: #f2f2f2;
+}
+#footer ul li{
+	padding-top: 28px;
+	padding-bottom: 4px;
+	background: url() no-repeat center 2px;
+	text-align: center;
+	font-size: 10px;
+}
+#footer ul li.active{ color: #6ab494; }
+#footer ul li:nth-child(1){ background-image: url(../image/btmimg/10.png); background-size:24px 24px}
+#footer ul li:nth-child(2){ background-image: url(../image/btmimg/20.png); background-size:24px 24px}
+#footer ul li:nth-child(3){ background-image: url(../image/btmimg/30.png); background-size:24px 24px}
+#footer ul li:nth-child(4){ background-image: url(../image/btmimg/40.png); background-size:24px 24px}
+#footer ul li:nth-child(1).active{ background-image: url(../image/btmimg/11.png); background-size:24px 24px}
+#footer ul li:nth-child(2).active{ background-image: url(../image/btmimg/21.png); background-size:24px 24px}
+#footer ul li:nth-child(3).active{ background-image: url(../image/btmimg/31.png); background-size:24px 24px}
+#footer ul li:nth-child(4).active{ background-image: url(../image/btmimg/41.png); background-size:24px 24px}
+
+.scrollbar {
+	display: -webkit-box;
+	/*必不可少*/
+	display: -webkit-flex;
+	text-align: center;
+	height: 40px;
+	line-height: 40px;
+	background: #EBECF0;
+	font-size: 16px;
+	position: relative;
+}
+.indexbar {
+	position: absolute;/*background: #0fc;*/
+	width: 50%;
+	height: 5px;
+	left: 0px;
+	bottom: 0px;
+	-webkit-transition: 300ms;
+}
+.redbox {
+	background: #DB4646;
+	width: 60px;
+	height: 5px;
+	position: relative;
+	left: auto;
+	right: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+.btn_click {background: #DADDE0;}

@@ -5,9 +5,9 @@
     <description>测试</description>
     <author email="hujun123qwe@163.com" href="http://www.ploveruav.com">hujun123qwe</author>
     <content src="index.html"/>
-    <preference name="appBackground" value="rgba(0,0,0,0)"/>
-    <preference name="windowBackground" value="rgba(0,0,0,0)"/>
-    <preference name="frameBackgroundColor" value="rgba(0,0,0,0)"/>
+    <preference name="appBackground" value="rgba(255,255,255,0)"/>
+    <preference name="windowBackground" value="rgba(255,255,255,0)"/>
+    <preference name="frameBackgroundColor" value="rgba(255,255,255,0)"/>
     <preference name="autoLaunch" value="true"/>
     <preference name="autoUpdate" value="true"/>
     <preference name="smartUpdate" value="false"/>

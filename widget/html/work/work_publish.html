@@ -9,41 +9,9 @@
   <link rel="stylesheet" type="text/css" href="../../css/style.css"/>
   <link rel="stylesheet" type="text/css" href="../../css/work_publish.css"/>
 </head>
-
 <body>
-  <!-- ====================================== -->
-  <!-- <div class="work_item">
-    <div class="work_img">
-      <img style="border-radius:0.5rem;" src="../../image/test/1.jpg"/>
-    </div>
-    <div class="work_title">
-      <h2>中稻/400亩/当涂县护河镇</h2>
-      <div class="work_attr">
-        <span class="work_label">未领取</span>
-        <span class="time_over">5小时前</span>
-      </div>
-    </div>
-    <div class="hr"></div>
-    <div class="work_info">
-      <ul class="ulall">
-        <li class="liup">作物</li>
-        <li class="lidown">水稻</li>
-      </ul>
-      <ul class="ulall">
-        <li class="liup">单价</li>
-        <li class="lidown">￥8元/亩</li>
-      </ul>
-      <ul class="ulall">
-        <li class="liup">亩数</li>
-        <li class="lidown">1420亩</li>
-      </ul>
-      <ul class="ulright">
-        <li class="liup">总价</li>
-        <li class="lidown">￥11360元</li>
-      </ul>
-    </div>
-  </div> -->
-  <ul class="content">
+  <div id="main">
+  <ul class="content" id="workList">
       <li onclick="toDetail()" tapmode="">
           <div class="item">
               <div class="img">
@@ -101,16 +69,132 @@
               </div>
           </div>
       </li>
+
   </ul>
+</div>
   <!-- ====================================== -->
   <script type="text/template" id="template">
-
+    {{~it:work:index}}
+    <li onclick="toDetail({{=work.work_id}})" tapmode="">
+        <div class="item">
+            <div class="img">
+                <img src="../../image/work-publish/1.jpg">
+            </div>
+            <div class="text">
+                <div class="text-title">{{=work.work_crop}}/{{=work.work_area}}/{{=work.work_place}}</div>
+                <div class="text-price">
+                    <span class="new-price">￥{{=work.work_price*work.work_area}}</span>
+                </div>
+                <div class="text-label">
+                    <i class="icon icon-people"></i>
+                    {{? work.is_order}}
+                    <span class="time_over">已抢单</span>
+                    {{??}}
+                    <span class="time_over">未领取</span>
+                    {{?}}
+                    <i class="icon icon-heart"></i>
+                    <span class="work_label">{{=work.updatedAt}}</span>
+                </div>
+            </div>
+        </div>
+    </li>
+    {{~}}
   </script>
 </body>
 </html>
 
 <!-- ================================================================ -->
-<script type="text/javascript" src="script/api.js"></script>
+<script type="text/javascript" src="../../script/api.js"></script>
+<script type="text/javascript" src="../../script/doT.min.js"></script>
+<script type="text/javascript" src="../../script/db.js"></script>
+<script type="text/javascript" src="../../script/APICloud-rest-SHA1.js"></script>
 <script type="text/javascript">
+apiready = function() {
+  init();
+  getWorkList();
+}
+function init(){
+  var LIMIT = 0;
+  var skip = 0;
+  var loadMore = 0;
+}
+function getWorkList() {
+  var client = new Resource("A6940390958009", "49A63C55-9F0D-9EB2-C015-B94CBD73D6DC");
+  var Work= client.Factory("work");
+  Work.query({
+    "filter":{
+      "where":{"is_publish":"true"},
+      "skip":0,
+      "limit":10,
+      "order":"updatedAt DESC"
+    }
+  },function(ret,err){
+    if(ret){
+      findData(ret);
+    }else{
+      alert(JSON.stringify(err));
+    }
+  });
+}
+function findData(data) {
+  for(item in data){
+    for(i in data[item]){
+      if(i==='updatedAt'){
+        data[item][i] = getDateDiff(new Date(data[item][i]).getTime());
+      }
+    }
+  }
+  loadWorkList(data);
+}
 
+function loadWorkList(data) {
+  var list = $api.byId('workList');
+  var tempFn = doT.template($api.byId('template').innerHTML);
+  var resultText = tempFn(data);
+  $api.html(list, resultText);
+}
+
+//对叠加对象如何循环
+function getDateDiff(dateTimeStamp){
+        var minute = 1000 * 60;
+        var hour = minute * 60;
+        var day = hour * 24;
+        var halfamonth = day * 15;
+        var month = day * 30;
+        var now = new Date().getTime();
+        var diffValue = now - dateTimeStamp;
+        if(diffValue < 0){
+                //若日期不符则弹出窗口告之
+                //alert("结束日期不能小于开始日期！");
+        }
+        var monthC =diffValue/month;
+        var weekC =diffValue/(7*day);
+        var dayC =diffValue/day;
+        var hourC =diffValue/hour;
+        var minC =diffValue/minute;
+        if(monthC>=1){
+                result= parseInt(monthC) + "个月前";
+        }else if(weekC>=1){
+                result=parseInt(weekC) + "周前";
+        }else if(dayC>=1){
+                result=parseInt(dayC) +"天前";
+        }else if(hourC>=1){
+                result= parseInt(hourC) +"个小时前";
+        }else if(minC>=1){
+                result=parseInt(minC) +"分钟前";
+        }else{
+                result="刚刚";
+        }
+        return result;
+}
+function toDetail(work_id){
+  api.openWin({
+      name: 'workDetail',
+      url: '../404.html',
+      pageParam: {
+          name: 'test'
+      }
+  });
+
+}
 </script>
