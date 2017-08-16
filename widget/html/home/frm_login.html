@@ -144,7 +144,7 @@
     }
     function login(){
         // api.showProgress();
-        if(!$api.val($api.byId("#username")) || !$api.val($api.byId("#password"))){
+        if(!$api.val(input) || !$api.val($api.byId("#password"))){
           alert('用户名/密码不能为空');
         }else{
           var username = $api.val($api.byId("#username"));
