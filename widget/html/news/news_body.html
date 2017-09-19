@@ -23,16 +23,16 @@
 <script type="text/template" id="template">
     {{~it:news:index}}
     <div class="news_li">
-      <div class="news_tu">
+      <div class="news_tu" style="background:url({{=news.img.url}}) center; background-size: 90%;">
         <a href="{{=news.url}}" target="_self">
-          <img src="{{=news.img.url}}" alt="{{=news.title}}"/>
+          <!-- <img src="{{=news.img.url}}" alt="{{=news.title}}"/> -->
         </a>
       </div>
         <h2><a href="{{=news.url}}" target="_self">{{=news.title}}</a></h2>
         <div class="news_ti">
           <span class="type-round">{{=news.type}}</span>
           <span class="trbstxt">{{=news.updatedAt}}</span>
-          <span class="trbszan">{{=news.read}}</span>
+          <span class="trbszan" style="float:right; margin-right:18px;">{{=news.read}}</span>
         </div>
       </div>
     </div>
@@ -45,6 +45,7 @@
 <script type="text/javascript" src=""></script>
 
 <script type="text/javascript">
+
   apiready = function() {
     init();
     getWareList();

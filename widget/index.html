@@ -54,7 +54,8 @@
     apiready = function () {
 //      APICloud前端框架
 //     根据config.xml的statusBarAppearance属性，设置沉浸式标题栏
-        // $api.fixStatusBar( $api.dom('#header') );
+        $api.fixStatusBar( $api.dom('#header') );
+        //$api.fixStatusBar(el);
         api.setStatusBarStyle({
             style: 'light',
             color: '#0039cb'
